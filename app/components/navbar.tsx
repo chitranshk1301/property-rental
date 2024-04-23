@@ -1,3 +1,6 @@
+
+"use client"
+
 import Link from 'next/link'
 
 const Navbar: React.FC = () => {
@@ -10,15 +13,15 @@ const Navbar: React.FC = () => {
               <div className="flex-shrink-0">
                 <img
                   className="h-8 w-8"
-                  src="/logo.svg"
-                  alt="Logo"
+                  src="../../public/next.svg"
+                  alt="DreamRent"
                 />
               </div>
             </Link>
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
                 <Link
-                  href="/"
+                  href="/properties"
                   className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Properties
