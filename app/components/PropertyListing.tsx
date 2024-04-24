@@ -1,4 +1,4 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 import { Property } from '../lib/types';
 
@@ -10,11 +10,10 @@ const PropertyListing: React.FC<PropertyListingProps> = ({ property }) => {
   return (
     <div className="border rounded-lg shadow-md overflow-hidden">
       <div className="relative h-48">
-        <Image
-          src={property.image}
+        <img
+          src="https://www.shutterstock.com/shutterstock/photos/2272988501/display_1500/stock-photo-home-design-bayside-in-melbourne-australia-2272988501.jpg"
           alt={property.title}
-          fill
-          className="object-cover"
+          className="object-cover h-48 w-full"
         />
       </div>
       <div className="p-4">
