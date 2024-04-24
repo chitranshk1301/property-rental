@@ -1,5 +1,5 @@
 import React from 'react';
-import firebase, { auth } from '../firebase/firebaseClient';
+import firebase, { auth } from '../../firebase/firebaseClient';
 
 const Auth: React.FC = () => {
   const handleGoogleLogin = async () => {
