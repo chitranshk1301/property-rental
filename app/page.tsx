@@ -1,7 +1,12 @@
+"use client";
+
+import { useState } from "react";
+import PropertyFilter from "./components/PropertyFilter";
 import PropertyListing from "./components/PropertyListing";
+import ProtectedRoute from "./components/ProtectedRoute";
 import { Property } from "./lib/types";
 
-// Sample data 
+// Sample data
 const properties: Property[] = [
   {
     id: "1",
@@ -72,8 +77,8 @@ const properties: Property[] = [
     bedrooms: 4,
     location: "Rural Area, TX",
     amenities: ["Swimming Pool", "Gazebo", "Greenhouse"],
- },
- {
+  },
+  {
     id: "8",
     title: "Cozy Bungalow in the Suburbs",
     description: "A charming bungalow with a large backyard.",
@@ -82,18 +87,50 @@ const properties: Property[] = [
     bedrooms: 3,
     location: "Suburban Area, IL",
     amenities: ["Patio", "BBQ Area", "Garage"],
- },
+  },
 ];
 
 export default function Home() {
+  const [filteredProperties, setFilteredProperties] =
+    useState<Property[]>(properties);
+
+  const handleFilter = (filters: Record<string, any>) => {
+    const { location, priceRange, bedrooms, amenities } = filters;
+    const filtered = properties.filter((property) => {
+      const matchesLocation =
+        !location ||
+        property.location.toLowerCase().includes(location.toLowerCase());
+      const matchesPriceRange =
+        property.price >= priceRange[0] && property.price <= priceRange[1];
+      const matchesBedrooms = !bedrooms || property.bedrooms >= bedrooms;
+      const matchesAmenities =
+        !amenities.length ||
+        amenities.every((amenity: any) => property.amenities.includes(amenity));
+
+      return (
+        matchesLocation &&
+        matchesPriceRange &&
+        matchesBedrooms &&
+        matchesAmenities
+      );
+    });
+
+    setFilteredProperties(filtered);
+  };
+
   return (
+    <ProtectedRoute>
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">Featured Properties</h1>
+      <h1 className="text-3xl font-bold mb-8">Featured properties for you</h1>
+      <div className="mb-5">
+        <PropertyFilter onFilter={handleFilter} />
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {properties.map((property) => (
+        {filteredProperties.map((property) => (
           <PropertyListing key={property.id} property={property} />
         ))}
       </div>
     </div>
+    </ProtectedRoute>
   );
 }

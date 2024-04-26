@@ -1,21 +1,28 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
+import { initializeApp } from "firebase/app";
+import { getAuth } from 'firebase/auth';
 
-// Your Firebase configuration
+
 const firebaseConfig = {
-  // Replace with your Firebase project configuration
-  apiKey: 'YOUR_API_KEY',
-  authDomain: 'YOUR_AUTH_DOMAIN',
-  projectId: 'YOUR_PROJECT_ID',
-  storageBucket: 'YOUR_STORAGE_BUCKET',
-  messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
-  appId: 'YOUR_APP_ID',
+  apiKey: "AIzaSyBjj3K9MIJdJxenl506yLaQZ4HFWiMCJb0",
+  authDomain: "totality-assignment-4d02d.firebaseapp.com",
+  projectId: "totality-assignment-4d02d",
+  storageBucket: "totality-assignment-4d02d.appspot.com",
+  messagingSenderId: "845291559453",
+  appId: "1:845291559453:web:874fb6a2c5f4c697c784f4",
+  measurementId: "G-2WMYXKDC28"
 };
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+// ----------------  Below is with environmental variables  ------------------------------
 
-// Export Firebase Auth instance
-export const auth = firebase.auth();
+// const firebaseConfig = {
+//     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+//     authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+//     projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+//     storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+//     messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+//     appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+// };
 
-export default firebase;
+
+const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
